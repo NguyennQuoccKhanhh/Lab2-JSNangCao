@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab2.1</title>
+</head>
+<script>
+    // Mảng sự kiện trong trận đấu
+    const matchEvents = [
+        [5, '⚽ GOAL'],
+        [17, '🔄 SUBSTITUTION'],
+        [35, '🟨 YELLOW CARD'],
+        [45, '⚽ GOAL'],
+        [64, '🟨 YELLOW CARD'],  // Thẻ vàng không đúng, sẽ xóa sau khi trận đấu kết thúc
+        [75, '⚽ GOAL'],
+        [82, '🟨 YELLOW CARD'],
+        [88, '🟥 RED CARD'],
+    ];
+    // Tạo mảng sự kiện khác nhau
+    const uniqueEvents = [...new Set(matchEvents.map(event => event[1]))];
+    console.log(uniqueEvents);
+
+    // 2. Xóa thẻ vàng phút 64
+    const indexOfYellowCard64 = matchEvents.findIndex(event => event[0] === 64 && event[1] === '🟨 YELLOW CARD');
+    if (indexOfYellowCard64 !== -1) {
+        matchEvents.splice(indexOfYellowCard64, 1);
+    }
+    console.log(indexOfYellowCard64);
+    
+    // 3. In ra console thông tin về số sự kiện và trung bình mỗi 9 phút
+    const totalEvents = matchEvents.length;
+    const averageEventsPer9Minutes = totalEvents / 90;
+    console.log(`${totalEvents} sự kiện xảy ra, trung bình mỗi 9 phút: ${averageEventsPer9Minutes.toFixed(2)}`);
+
+    // 4. In ra màn hình với đánh dấu cho từng sự kiện trong hiệp 1 hoặc hiệp 2
+    matchEvents.forEach(event => {
+        const [minute, action] = event;
+        const half = minute <= 45 ? '[FIRST HALF]' : '[SECOND HALF]';
+        console.log(`${half} ${minute}: ${action}`);
+    });
+</script>
+
+<body>
+    <h1>Hello Word</h1>
+</body>
+
+</html>
